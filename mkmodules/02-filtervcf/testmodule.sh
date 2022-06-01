@@ -3,7 +3,7 @@
 
 ###
 ## environment variable setting
-# export NONE="NONE"
+export BEDFILE="test/reference/complete_mirna.bed"
 ###
 
 echo "[>..] test running this module with data in test/data"

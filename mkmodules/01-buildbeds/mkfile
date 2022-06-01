@@ -2,4 +2,11 @@ MKSHELL=/bin/bash
 
 %.CREATE_BED:QV: %.gff3
 	echo "[DEBUG] create beds for $prereq"
-	Rscript --vanilla mirbase.R $prereq
+	Rscript --vanilla mirbase.R $prereq \
+	&& cat down1k_primary_mirBase_22.bed \
+	primary_mirBase_22.bed \
+	up1k_primary_mirBase_22.bed \
+	| bedtools sort \
+	| bedtools merge \
+	| sort -V \
+	> complete_mirna.bed

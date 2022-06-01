@@ -2,7 +2,8 @@ MKSHELL=/bin/bash
 
 %.filtered.vcf:Q: %.vcf.gz
 	echo "[DEBUG] Filter vcf for $prereq"
-	bcftools view \
+	tabix -p vcf -f $prereq \
+	&& bcftools view \
 		--compression-level 0 \
 		--output-type v \
 		--min-ac 1 \
@@ -11,4 +12,7 @@ MKSHELL=/bin/bash
 		--types snps \
 		--max-alleles 2 \
 		-i 'AN>140' \
-		$prereq > $target
+		--regions-file $BEDFILE \
+		$prereq \
+		| bcftools annotate \
+			-x ^INFO/AF,FILTER,QUAL  > $target
