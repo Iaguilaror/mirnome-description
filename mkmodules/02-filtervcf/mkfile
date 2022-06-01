@@ -1,0 +1,14 @@
+MKSHELL=/bin/bash
+
+%.filtered.vcf:Q: %.vcf.gz
+	echo "[DEBUG] Filter vcf for $prereq"
+	bcftools view \
+		--compression-level 0 \
+		--output-type v \
+		--min-ac 1 \
+		--threads 1 \
+		--drop-genotypes \
+		--types snps \
+		--max-alleles 2 \
+		-i 'AN>140' \
+		$prereq > $target
