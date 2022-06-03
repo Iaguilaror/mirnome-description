@@ -1,0 +1,9 @@
+MKSHELL=/bin/bash
+
+%.variants.bed:Q: %.bed $BASEBED
+	echo "[DEBUG] Find variants from $prereq"
+	bedtools intersect \
+		-a $stem.bed \
+		-b $BASEBED \
+		-wao \
+	> $target
