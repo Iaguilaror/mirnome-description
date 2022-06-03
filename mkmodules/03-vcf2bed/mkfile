@@ -1,0 +1,7 @@
+MKSHELL=/bin/bash
+
+%.bed:Q: %.vcf
+	echo "[DEBUG] convert vcf2bed for $prereq"
+	bcftools view -H $prereq \
+	| awk ' BEGIN {FS=OFS="\t"}
+	 	{ print $1, $2 - 1, $2, $1"_"$2"_"$4"_"$5"_"$8, ".", "+" }' > $target
