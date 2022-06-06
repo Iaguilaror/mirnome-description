@@ -12,7 +12,7 @@ args = commandArgs( trailingOnly = TRUE )
 
 ## Uncomment For debugging only
 ## Comment for production mode only
-# args[1] <- "*.gff3" ## the input gff3
+# args[1] <- "test/data/hsa.gff3" ## the input gff3
 
 ## Passing args to named objects
 input_gff <- args[1]
@@ -113,7 +113,7 @@ bed_up <- surrounding %>%
           score,
           strand,
           order ) %>%
-  mutate( Name = paste0( Name, "_upstream_1k") ) %>%
+  mutate( Name = paste0( Name, ".upstream_1k") ) %>%
   arrange( order, up1k_start, up1k_end  ) %>%
   select( -order )
 
@@ -126,7 +126,7 @@ bed_down <- surrounding %>%
           score,
           strand,
           order ) %>%
-  mutate( Name = paste0( Name, "_downstream_1k") ) %>%
+  mutate( Name = paste0( Name, ".downstream_1k") ) %>%
   arrange( order, down1k_start, down1k_end  ) %>%
   select( -order )
 
@@ -151,7 +151,7 @@ bed_primaries <- separated %>%
           Name,
           score,
           strand ) %>%
-  mutate( Name = paste0( Name, "_primary" ) )
+  mutate( Name = paste0( Name, ".primary" ) )
 
 # save beds
 write.table( x = bed_primaries,
@@ -323,7 +323,7 @@ allmature <- bind_rows( mature_untangled_tmp_plus,
   mutate( Name = paste( Name,
                         region,
                         mirposition,
-                        sep = "_" ) )
+                        sep = "." ) )
 
 # prepare bedfile
 #### get primary coordinates only ----
