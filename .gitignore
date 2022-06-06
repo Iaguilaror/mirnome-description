@@ -15,9 +15,9 @@ work*
 mkmodules/*/test/results/*
 
 ## ignore intermediate and logs from tests
-test/data/*/intermediate/
-test/data/*/logs/
-test/results*
+test/*/intermediate/
+test/*/logs/
+test/*/results*
 
 ## ignore local R datas
 *.Rdata
