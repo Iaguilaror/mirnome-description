@@ -1,0 +1,5 @@
+MKSHELL="/bin/bash"
+
+allvariants.bed:Q: $BEDDIR
+	echo "[DEBUG] gathering beds in $BEDDIR"
+	Rscript --vanilla format.R $prereq
